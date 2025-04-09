@@ -106,13 +106,25 @@ struct WebView: NSViewRepresentable {
 // ウィンドウへの参照取得用
 struct WindowAccessor: NSViewRepresentable {
     var callback: (NSWindow) -> Void
+
     func makeNSView(context: Context) -> NSView {
         let v = NSView()
         DispatchQueue.main.async {
-            if let w = v.window { callback(w) }
+            if let w = v.window {
+                // タイトルバーを透明に…
+                w.titlebarAppearsTransparent = true
+                // …でもコンテンツ領域はタイトルバー下には広げない
+                w.styleMask.remove(.fullSizeContentView)
+                // 背景を黒く
+                w.backgroundColor = .black
+                // （オプション）背景クリックでドラッグ可能に
+                w.isMovableByWindowBackground = true
+                callback(w)
+            }
         }
         return v
     }
+
     func updateNSView(_ nsView: NSView, context: Context) {}
 }
 
@@ -150,6 +162,8 @@ struct ContentView: View {
             .onChange(of: pageTitle) { new in
                 nsWindow?.title = new
             }
+            .toolbarBackground(Color.black, for: .automatic)
+            .toolbarBackground(.visible,   for: .automatic)
             .toolbar {
                 ToolbarItemGroup(placement: .principal) {
                     Button(action: { webView?.goBack() }) {
