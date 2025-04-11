@@ -1,5 +1,5 @@
 
-<img width="1560" alt="Screenshot 2025-04-09 at 19 11 25" src="https://github.com/user-attachments/assets/adfdef20-d418-4935-a3d0-ce867893bb2b" />
+<img width="1183" alt="DiamondGotCat-Viewer-V3" src="https://github.com/user-attachments/assets/81928e3c-57b2-487f-ab8b-1ed91112483b" />
 
 # DiamondGotCat-Viewer
 DiamondGotCat Viewer for macOS
